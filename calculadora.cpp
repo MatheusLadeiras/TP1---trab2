@@ -16,8 +16,6 @@ int main() {
     
     // paramos a checagem em 4 * - 8
     // - em próximo numeral deu 45, o problema disso não está na leitura, eu tenho que fazer a impressão ler como %c em vez de %i
-    //opicional: fazer aparecer a expressao depois de colocar cada valor 
-    
     
     printf("ATENÇÃO: Para sair da calculadora, aperte enter sem ter colocado um valor. \n");
     printf("Qual o primeiro número da expressão? ");
@@ -27,6 +25,10 @@ int main() {
 		invalido = invalido - 1;
 		expressao[0] = 0;
 		printf("Desligando a calculadora, resultado final: \n"); 
+	} else if (!isdigit(input[0])) {
+		invalido = invalido + 2;
+		holdSignInput = input[0];
+		expressao[posicao] = holdSignInput; 
 	} else {
     	resultado = atoi(input);
 		expressao[0] = resultado; 
@@ -103,8 +105,7 @@ int main() {
 		}
 		 
 		for(i = 0; i <= posicao; i++) {
-			int c = 0;
-			c == expressao[i];
+			char c = expressao[i];
 			if (isdigit(c)) { // só o de baixo está pegando
 				printf("%i ", expressao[i]);
 			} else {
