@@ -8,11 +8,12 @@
 int main() {
     setlocale(LC_ALL, "Portuguese");
     float resultado = 0;
-    int i, posicao = 0, invalido = 0, desligar = 0; 
+    int i = 0, posicao = 0, invalido = 0, desligar = 0; 
     char expressao[100];
     char input [1];
     int holdNumberInput;
     char holdSignInput;
+    
     
     // paramos a checagem em 4 * - 8
     // - em próximo numeral deu 45, o problema disso não está na leitura, eu tenho que fazer a impressão ler como %c em vez de %i
@@ -103,15 +104,29 @@ int main() {
 			}
 		
 		}
+		//int c = atoi(expressao);
+		//printf("c: %i   ", c); 
 		 
-		for(i = 0; i <= posicao; i++) {
-			char c = expressao[i];
+	/*	for(i = 0; i <= posicao; i++) {
+			printf("%i => ", i);
+			
 			if (isdigit(c)) { // só o de baixo está pegando
 				printf("%i ", expressao[i]);
 			} else {
 				printf("%c ", expressao[i]);
-			}
-		} 
+			} 
+		} */
+		
+		i = 0;
+		while(expressao[i] != '\0'){
+	        if(!isdigit(expressao[i])){
+	             printf("%c ",expressao[i]);
+	        } else {
+				printf("%i ", expressao[i]);
+			} 
+	        i++;
+    	}
+		
 		
 		//método antigo
 		/* for(i = 0; i <= posicao; i++) {
@@ -125,6 +140,8 @@ int main() {
 		} else {
 			printf("que dá um total de: %f \n", resultado);
 		}
+		
+		// puts(expressao);
 		
 	} while (desligar == 0); 
    
