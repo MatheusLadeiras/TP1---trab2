@@ -8,142 +8,69 @@
 int main() {
     setlocale(LC_ALL, "Portuguese");
     float resultado = 0;
-    int i = 0, posicao = 0, invalido = 0, desligar = 0; 
-    char expressao[100];
-    char input [1];
-    int holdNumberInput;
-    char holdSignInput;
+    int i = 0, posicao = 0, invalido = 0, intercalar = 0, space = 0, x = 0; 
+    char expressao[101];
+    char operacao;
+    int k ;
+	char c;
     
+    printf("Digite a expressão a ser calculada: ");
+    gets(expressao);
     
-    // paramos a checagem em 4 * - 8
-    // - em próximo numeral deu 45, o problema disso não está na leitura, eu tenho que fazer a impressão ler como %c em vez de %i
+    resultado = atoi(expressao);
     
-    printf("ATENÇÃO: Para sair da calculadora, aperte enter sem ter colocado um valor. \n");
-    printf("Qual o primeiro número da expressão? ");
-    fgets(input, 2, stdin);
-	if (input[0] == '\n') {
-		desligar++;
-		invalido = invalido - 1;
-		expressao[0] = 0;
-		printf("Desligando a calculadora, resultado final: \n"); 
-	} else if (!isdigit(input[0])) {
-		invalido = invalido + 2;
-		holdSignInput = input[0];
-		expressao[posicao] = holdSignInput; 
-	} else {
-    	resultado = atoi(input);
-		expressao[0] = resultado; 
+    i = 0;
+    while(expressao[i] != '\0') {
+    	k = expressao[i];
+    	if (isspace(expressao[i])) {
+    		//printf("isspace \n");
+		} else if (isdigit(k)) {  
+    		if (intercalar == 1) {
+    			invalido = 1;
+			}
+			intercalar = 1;
+		} else {
+			space = 0;
+			x = i+1;
+			while (isspace(expressao[x])) {
+				space += 1;
+				x++;
+			}
+			operacao = expressao[i+1+space] - '0'; 
+			switch(expressao[i]) { 
+	    		case '+': resultado = resultado + operacao; 
+	    		break;
+	    		case '-': resultado = resultado -  operacao;
+	    		break;
+	    		case '*': resultado = resultado *  operacao;
+	    		break;
+	    		case '/': resultado = resultado /  operacao;
+	    		break;
+	    		case '^': resultado = pow(resultado,  operacao);
+	    		break;
+	    		default: invalido = 1;
+	    		break;
+			}
+			if (intercalar == 0) { 
+    			invalido = 1;
+			}
+			intercalar = 0;
+		}
+    	i++;
+    }
+    printf("invalido: %i \n", i); 
+    
+    if (!isdigit(k)) {
+    	invalido = 1;
 	}
 	
-    /* printf("resultado: %f \n", resultado);
-    printf("expressao: %i \n", expressao[0]);
-	printf("input: %s \n", input); */
-	
+    printf("A expressão %s ", expressao);
     
-    do {
-
-    	if (desligar == 0) {
-			posicao = posicao + 1; 
-	    	//printf("posicao: %i \n", posicao);
-	    	printf("Digite o sinal da operação: "); 
-	    	fflush(stdin);
-	    	fgets(input, 2, stdin);
-	    	if (input[0] == '\n') {
-	    		desligar++;
-	    		invalido = invalido - 1;
-	    		posicao = posicao - 1;
-	    		printf("Desligando a calculadora, resultado final: \n"); 
-			} else {
-		    	holdSignInput = input[0];
-				expressao[posicao] = holdSignInput; 
-			}
-				/* printf("holdSignInput: %c \n", holdSignInput);
-				 printf("resultado: %f \n", resultado);
-		   		 printf("expressao: %i \n", expressao[0]);
-				 // printf("expressao: %s \n", expressao);*/
-				 //printf("input: %s \n", input); 
-    	}
-    	
-
-    	if (desligar == 0) {
-			posicao = posicao + 1;
-	    	printf("Digite o próximo numeral da operação: ");
-	    	fflush(stdin);
-	    	fgets(input, 2, stdin);
-	    	if (input[0] == '\n') {
-	    		desligar++; 
-	    		posicao = posicao - 1;
-	    		printf("Desligando a calculadora, resultado final: \n"); 
-			} else if (!isdigit(input[0])) {
-				invalido++;
-				holdSignInput = input[0];
-				expressao[posicao] = holdSignInput; 
-			} else {
-		    	holdNumberInput = atoi(input);
-				expressao[posicao] = holdNumberInput; 
-			}
-				 /*printf("resultado: %f \n", resultado);
-		   		 printf("expressao: %i \n", expressao[0]);
-				 // printf("expressao: %s \n", expressao);
-				 printf("input: %s \n", input); */
-		
-	
-	    	switch(expressao[posicao - 1]) {
-	    		case '+': resultado = resultado + expressao[posicao];
-	    		break;
-	    		case '-': resultado = resultado - expressao[posicao];
-	    		break;
-	    		case '*': resultado = resultado * expressao[posicao];
-	    		break;
-	    		case '/': resultado = resultado / expressao[posicao];
-	    		break;
-	    		case '^': resultado = pow(resultado, expressao[posicao]);
-	    		break;
-	    		default: invalido++;
-	    		break;
-			}
-		
-		}
-		//int c = atoi(expressao);
-		//printf("c: %i   ", c); 
-		 
-	/*	for(i = 0; i <= posicao; i++) {
-			printf("%i => ", i);
-			
-			if (isdigit(c)) { // só o de baixo está pegando
-				printf("%i ", expressao[i]);
-			} else {
-				printf("%c ", expressao[i]);
-			} 
-		} */
-		
-		i = 0;
-		while(expressao[i] != '\0'){
-	        if(!isdigit(expressao[i])){
-	             printf("%c ",expressao[i]);
-	        } else {
-				printf("%i ", expressao[i]);
-			} 
-	        i++;
-    	}
-		
-		
-		//método antigo
-		/* for(i = 0; i <= posicao; i++) {
-			printf("%i ", expressao[i]);
-			i++;
-			printf("%c ", expressao[i]);
-		} */
-		
-		if (invalido >= 1) {
-			printf("é uma Expressão inválida\n", resultado);
+    if (invalido == 1) { 
+			printf("é uma Expressão inválida\n");
 		} else {
-			printf("que dá um total de: %f \n", resultado);
+			printf("resulta em: %f \n", resultado);
 		}
-		
-		// puts(expressao);
-		
-	} while (desligar == 0); 
    
     return 0;
 }

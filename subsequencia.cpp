@@ -13,7 +13,6 @@ int main() {
 			printf("O valor selecionado é inválido, por favor inserir um novo valor \n");
 		}
 	} while (tamanho <= 2);
-	//printf("tamanho: %i\n", tamanho);
 	
 	int sequencia [tamanho]; //tem que ficar aqui ou um undefined behavior vai ocorrer
 	
@@ -43,7 +42,6 @@ int main() {
 		for (i = o; i < subsequecia_tam + o; i++) { 
 			subsequencia_soma += sequencia[i];
 			subsequencia[0 + x] = sequencia[i];
-			// printf("subsequencia = [ %i  ] \n", subsequencia[x]);
 			if (subsequencia_soma > maior) {
 				maior = subsequencia_soma;
 				for(u = 0; u < subsequecia_tam; u++) {
@@ -54,9 +52,6 @@ int main() {
 		}
 		subsequencia_soma = 0;	
 		x = 0;
-		/*printf("maior: %i \n", maior);
-		printf("Soma da subsequencia: %i \n", subsequencia_soma);
-		printf("======================================================================================================\n"); */
 	}
 	
 	printf("A maior subsequencia é = [");	
@@ -77,7 +72,6 @@ int main() {
 		for (i = o; i < subsequecia_tam + o; i++) {
 			subsequencia_soma += sequencia[i]; 
 			subsequencia[0 + x] = sequencia[i];
-			//printf("subsequencia = [ %i  ] \n", subsequencia[x]);
 			x++;
 		}
 		if (subsequencia_soma <= menor) { 
@@ -88,9 +82,6 @@ int main() {
 		}	
 		subsequencia_soma = 0;	
 		x = 0;	
-		/*printf("menor: %i \n", menor);
-		printf("Soma da subsequencia: %i \n", subsequencia_soma);
-		printf("======================================================================================================\n"); */
 	}
 	
 	printf("A menor subsequencia é = [");	
@@ -107,6 +98,4 @@ int main() {
    
     return 0;
 }
- 
 
-// criar um array expansivo, usar o método do maior para o maior número, fazer um método menor(metodo maior mas caso menor seja igual a novo menor, menor = novo menor) para o menor
