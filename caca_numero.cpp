@@ -64,7 +64,6 @@ int main() {
 	for (i = 0; i < N; i++) {
 		for (j = 0; j <= N - k; j++) { 
 			if (s[x] == m[i][j]){ 
-				printf("Primeiro caracter \n");
 				y = j;
 				do { 
 					x++;
@@ -83,7 +82,6 @@ int main() {
 	for (i = 0; i < N; i++) {
 		for (j = N - 1; j >= k - 1; j--) { 
 			if (s[x] == m[i][j]){ 
-				printf("Primeiro caracter \n");
 				y = j;
 				do { 
 					x++;
